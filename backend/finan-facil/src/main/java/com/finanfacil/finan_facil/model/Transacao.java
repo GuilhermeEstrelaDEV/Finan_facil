@@ -19,21 +19,26 @@ public class Transacao {
     private LocalDate data;
 
     @Enumerated(EnumType.STRING)
-    private TipoTransacao tipo; // RECEITA ou DESPESA
+    private TipoTransacao tipo;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
+    @ManyToOne
+    @JoinColumn(name = "id_categoria")
+    private Categoria categoria;
+
     public Transacao() {}
 
-    public Transacao(Long id, String descricao, BigDecimal valor, LocalDate data, TipoTransacao tipo, Usuario usuario) {
+    public Transacao(Long id, String descricao, BigDecimal valor, LocalDate data, TipoTransacao tipo, Usuario usuario, Categoria categoria) {
         this.id = id;
         this.descricao = descricao;
         this.valor = valor;
         this.data = data;
         this.tipo = tipo;
         this.usuario = usuario;
+        this.categoria = categoria;
     }
 
     public Long getId() {
@@ -82,5 +87,13 @@ public class Transacao {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }
